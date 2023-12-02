@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Silly Story Generator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    #silly-story {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Silly Story Generator</h1>
+
+  <button onclick="generateSillyStory()">Generate Silly Story</button>
+
+  <p id="silly-story"></p>
+
+  <script>
+    const characters = ['A monkey', 'A wizard', 'A talking parrot', 'A ninja cat'];
+    const actions = ['ate a pizza', 'flew to the moon', 'danced salsa', 'solved a mystery'];
+    const settings = ['in a chocolate factory', 'on a pirate ship', 'underwater in Atlantis', 'in a parallel universe'];
+
+    function getRandomElement(array) {
+      const randomIndex = Math.floor(Math.random() * array.length);
+      return array[randomIndex];
+    }
+
+    function generateSillyStory() {
+      const character = getRandomElement(characters);
+      const action = getRandomElement(actions);
+      const setting = getRandomElement(settings);
+
+      const sillyStory = `${character} ${action} ${setting}. It was a day full of laughter and unexpected twists!`;
+
+      document.getElementById('silly-story').textContent = sillyStory;
+    }
+  </script>
+</body>
+</html>
