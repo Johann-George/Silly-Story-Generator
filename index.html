@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Silly Story Generator</title>
+  <title>Custom Silly Story Generator</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -11,11 +11,10 @@
       margin: 50px;
     }
 
-    button {
+    button, input, label {
       font-size: 16px;
-      padding: 10px 20px;
       margin: 10px;
-      cursor: pointer;
+      padding: 5px;
     }
 
     #silly-story {
@@ -25,9 +24,19 @@
   </style>
 </head>
 <body>
-  <h1>Random Silly Story Generator</h1>
+  <h1>Custom Silly Story Generator</h1>
 
-  <button onclick="generateSillyStory()">Generate Silly Story</button>
+  <label for="custom-name">Enter custom name:</label>
+  <input type="text" id="custom-name">
+
+  <br>
+
+  <label for="uk-checkbox">Convert to UK units:</label>
+  <input type="checkbox" id="uk-checkbox">
+
+  <br>
+
+  <button onclick="generateSillyStory()">Generate Random Story</button>
 
   <p id="silly-story"></p>
 
@@ -35,6 +44,7 @@
     const characters = ['A monkey', 'A wizard', 'A talking parrot', 'A ninja cat'];
     const actions = ['ate a pizza', 'flew to the moon', 'danced salsa', 'solved a mystery'];
     const settings = ['in a chocolate factory', 'on a pirate ship', 'underwater in Atlantis', 'in a parallel universe'];
+    const usWeights = ['10 pounds', '5 pounds', '15 pounds'];
 
     function getRandomElement(array) {
       const randomIndex = Math.floor(Math.random() * array.length);
@@ -45,8 +55,21 @@
       const character = getRandomElement(characters);
       const action = getRandomElement(actions);
       const setting = getRandomElement(settings);
+      const usWeight = getRandomElement(usWeights);
 
-      const sillyStory = `${character} ${action} ${setting}. It was a day full of laughter and unexpected twists!`;
+      let sillyStory = `One day, ${character} named Bob whose weight is ${usWeight} ${action} ${setting}. It was a day full of laughter and unexpected twists!`;
+
+      const customName = document.getElementById('custom-name').value.trim();
+      if (customName !== '') {
+        sillyStory = sillyStory.replace('Bob', customName);
+      }
+
+      const ukCheckbox = document.getElementById('uk-checkbox');
+      if (ukCheckbox.checked) {
+        sillyStory = sillyStory.replace('10 pounds', '5 kilograms');
+        sillyStory = sillyStory.replace('5 pounds', '2.27 kilograms');
+        sillyStory = sillyStory.replace('15 pounds', '6.8 kilograms');
+      }
 
       document.getElementById('silly-story').textContent = sillyStory;
     }
